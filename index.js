@@ -19,7 +19,7 @@ app.all('/city',(req,res,next)=>{
     console.log('Acceso al servidor de la ciudad.');
     next();
 })
-//Apartado de casas
+//Apartado get
 app.get ('/city/house',(req, res) =>{
     res.json([
         totalCasas = 10,
@@ -89,6 +89,71 @@ app.get ('/city/zComer',(req, res) =>{
         porReducir= 2    
     ]);
 });
+//Apartado post
+app.post ('/city/house',(req, res) =>{
+    console.log(req.body);
+    res.send('todo bien')
+});
+
+/*app.get ('/city/buildig',(req, res) =>{
+    res.json([
+        totalEdif = 10,
+        porCrear = 5,
+        porDestruir= 3,
+        porExandir= 5,
+        porReducir= 2    
+    ]);
+});
+
+app.get ('/city/apart',(req, res) =>{
+    res.json([
+        totalAparts = 10,
+        porCrear = 5,
+        porDestruir= 3,
+        porExandir= 5,
+        porReducir= 2    
+    ]);
+});
+
+app.get ('/city/ways',(req, res) =>{
+    res.json([
+        totalCarret = 10,
+        porCrear = 5,
+        porDestruir= 3,
+        porExandir= 5,
+        porReducir= 2    
+    ]);
+});
+
+app.get ('/city/puentes',(req, res) =>{
+    res.json([
+        totalPuents = 10,
+        porCrear = 5,
+        porDestruir= 3,
+        porExandir= 5,
+        porReducir= 2    
+    ]);
+});
+
+app.get ('/city/parques',(req, res) =>{
+    res.json([
+        totalParques = 10,
+        porCrear = 5,
+        porDestruir= 3,
+        porExandir= 5,
+        porReducir= 2    
+    ]);
+});
+
+app.get ('/city/zComer',(req, res) =>{
+    res.json([
+        totalZcomer = 10,
+        porCrear = 5,
+        porDestruir= 3,
+        porExandir= 5,
+        porReducir= 2    
+    ]);
+});*/
 
 app.use(express.static('Principal'));
 
