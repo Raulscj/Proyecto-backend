@@ -12,7 +12,16 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 
 //app.use(morgan('dev'));
-var status = app.use(morgan('dev'));
+app.use(morgan('dev'));
+
+//Query
+var house = [
+    totalCasas = 10,
+    porCrear = 5,
+    porDestruir= 3,
+    porExandir= 5,
+    porReducir= 2    
+];
 
 //Routting START
 app.all('/city',(req,res,next)=>{
@@ -21,13 +30,7 @@ app.all('/city',(req,res,next)=>{
 })
 //Apartado get
 app.get ('/city/house',(req, res) =>{
-    res.json([
-        totalCasas = 10,
-        porCrear = 5,
-        porDestruir= 3,
-        porExandir= 5,
-        porReducir= 2    
-    ]);
+    res.send(house);
 });
 
 app.get ('/city/buildig',(req, res) =>{
@@ -92,7 +95,17 @@ app.get ('/city/zComer',(req, res) =>{
 //Apartado post
 app.post ('/city/house',(req, res) =>{
     console.log(req.body);
-    res.send('todo bien')
+    let agg = (a,b,c)=>{
+       a[c] = parseInt(a[c])+ parseInt(b);  
+       console.log (a[c]); 
+       res.write(`${a[c]}`);
+    }; 
+    agg(house,req.body.totalCasas,0);
+    agg(house,req.body.porCrear,1);
+    agg(house,req.body.porDestruir,2);
+    agg(house,req.body.porExandir,3);
+    agg(house,req.body.porReducir,4);
+    res.end();
 });
 
 /*app.get ('/city/buildig',(req, res) =>{
