@@ -75,7 +75,7 @@ const data = {
 	],
 	zComer: [
 		{
-			ID_pa: 1,
+			ID_z: 1,
 			nLocals: 20,
 			pis: 5,
 			name: 'CC PLAZA',
@@ -91,7 +91,6 @@ const data = {
 //Apartado get
 app.get('/city/house',(req, res) =>{
     res.json(data.house);
-    
 });
 
 app.get('/city/buildig', (req, res) => {
@@ -175,53 +174,141 @@ app.put('/city/house/params/:dataID', (req, res) => {
 	for (let i = 0; i < data.house.length; i++) {
         if (data.house[i].ID_h == req.params.dataID) {
             data.house[i] = req.body;
-			//data.house[data.house.indexOf(i)] = req.body;
-            res.status(200).send(`ID numero ${req.params.dataID} encontrado y editado correctamente :D`)
+            res.status(200).send(`ID numero ${req.params.dataID} encontrado y editado correctamente`);
         }
         if (data.house[i].ID_h != req.params.dataID) {
             error_log += 1;
         }
     }
     if (error_log == data.house.length) {
-        res.status(404).send('el dato a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
+        res.status(404).send('El ID a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
     }
 });
 
 app.put ('/city/buildig/params/:dataID', (req, res) => {
     var error_log = 0;
-	for (let i = 0; i < data.house.length; i++) {
-        if (data.house[i].ID_h == req.params.dataID) {
-            data.house[i] = req.body;
-			//data.house[data.house.indexOf(i)] = req.body;
-            res.status(200).send(`Dato numero ${req.params.dataID} encontrado y editado correctamente :D`)
+	for (let i = 0; i < data.buildig.length; i++) {
+        if (data.buildig[i].ID_b == req.params.dataID) {
+            data.buildig[i] = req.body;
+            res.status(200).send(`ID numero ${req.params.dataID} encontrado y editado correctamente`);
         }
-        if (data.house[i].ID_h != req.params.dataID) {
+        if (data.buildig[i].ID_b != req.params.dataID) {
             error_log += 1;
         }
     }
-    if (error_log == data.house.length) {
-        res.status(404).send('el dato a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
+    if (error_log == data.buildig.length) {
+        res.status(404).send('El ID a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
     }
 });
 
-/*app.put ('/city/apart',(req, res) =>{
-    res.send(apart);
+app.put ('/city/apart/params/:dataID', (req, res) => {
+    var error_log = 0;
+	for (let i = 0; i < data.apart.length; i++) {
+        if (data.apart[i].ID_a == req.params.dataID) {
+            data.apart[i] = req.body;
+            res.status(200).send(`ID numero ${req.params.dataID} encontrado y editado correctamente`);
+        }
+        if (data.apart[i].ID_a != req.params.dataID) {
+            error_log += 1;
+        }
+    }
+    if (error_log == data.apart.length) {
+        res.status(404).send('El ID a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
+    }
 });
 
-app.put ('/city/ways',(req, res) =>{
-    res.send(ways);
+app.put ('/city/ways/params/:dataID', (req, res) => {
+    var error_log = 0;
+	for (let i = 0; i < data.ways.length; i++) {
+        if (data.ways[i].ID_w == req.params.dataID) {
+            data.ways[i] = req.body;
+            res.status(200).send(`ID numero ${req.params.dataID} encontrado y editado correctamente`);
+        }
+        if (data.ways[i].ID_w != req.params.dataID) {
+            error_log += 1;
+        }
+    }
+    if (error_log == data.ways.length) {
+        res.status(404).send('El ID a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
+    }
 });
 
-app.puts ('/city/puentes',(req, res) =>{
-    res.send(puentes);
+app.put ('/city/puentes/params/:dataID', (req, res) => {
+    var error_log = 0;
+	for (let i = 0; i < data.puentes.length; i++) {
+        if (data.puentes[i].ID_pu == req.params.dataID) {
+            data.puentes[i] = req.body;
+            res.status(200).send(`ID numero ${req.params.dataID} encontrado y editado correctamente`);
+        }
+        if (data.puentes[i].ID_pu != req.params.dataID) {
+            error_log += 1;
+        }
+    }
+    if (error_log == data.puentes.length) {
+        res.status(404).send('El ID a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
+    }
 });
 
-app.get ('/city/parques',(req, res) =>{
-    res.send(parques);
+app.put ('/city/parques/params/:dataID', (req, res) => {
+    var error_log = 0;
+	for (let i = 0; i < data.parques.length; i++) {
+        if (data.parques[i].ID_pa == req.params.dataID) {
+            data.parques[i] = req.body;
+            res.status(200).send(`ID numero ${req.params.dataID} encontrado y editado correctamente`);
+        }
+        if (data.parques[i].ID_pa != req.params.dataID) {
+            error_log += 1;
+        }
+    }
+    if (error_log == data.parques.length) {
+        res.status(404).send('El ID a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
+    }
 });
 
-app.get ('/city/zComer',(req, res) =>{
-    res.send(zComer);
+app.put ('/city/zComer/params/:dataID', (req, res) => {
+    var error_log = 0;
+	for (let i = 0; i < data.zComer.length; i++) {
+        if (data.zComer[i].ID_z == req.params.dataID) {
+            data.zComer[i] = req.body;
+            res.status(200).send(`ID numero ${req.params.dataID} encontrado y editado correctamente`);
+        }
+        if (data.zComer[i].ID_z != req.params.dataID) {
+            error_log += 1;
+        }
+    };
+    if (error_log == data.zComer.length) {
+        res.status(404).send('El ID a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
+    };
+});
+
+/*
+app.get('/city/house',(req, res) =>{
+    res.json(data.house);
+    
+});
+
+app.get('/city/buildig', (req, res) => {
+	res.json(data.buildig);
+});
+
+app.get('/city/apart', (req, res) => {
+	res.json(data.apart);
+});
+
+app.get('/city/ways', (req, res) => {
+	res.json(data.ways);
+});
+
+app.get('/city/puentes', (req, res) => {
+	res.json(data.puentes);
+});
+
+app.get('/city/parques', (req, res) => {
+	res.json(data.parques);
+});
+
+app.get('/city/zComer', (req, res) => {
+	res.json(data.zComer);
 });
 */
 
