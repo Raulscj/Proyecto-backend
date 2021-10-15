@@ -3,10 +3,10 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 
-//Settings 
-app.set('appName','Proyecto backend');
-app.set('port',3000);
-app.set('view engine', 'ejs');
+//Settings
+app.set('appName', 'Proyecto backend');
+app.set('port', 3000);
+//app.set('view engine', 'ejs');
 
 //Middlewares
 app.use(express.json());
@@ -15,212 +15,204 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 //Query
-var house = [
-    totalCasas = 10,
-    porCrear = 5,
-    porDestruir= 3,
-    porExandir= 5,
-    porReducir= 2    
-];
-var buildig = [
-    totalEdif = 10,
-    porCrear = 5,
-    porDestruir= 3,
-    porExandir= 5,
-    porReducir= 2
-];
-var apart =[
-    totalAparts = 10,
-    porCrear = 5,
-    porDestruir= 3,
-    porExandir= 5,
-    porReducir= 2
-];
-var ways =[
-    totalCarret = 10,
-    porCrear = 5,
-    porDestruir= 3,
-    porExandir= 5,
-    porReducir= 2
-];
-var puentes =[
-    totalPuents = 10,
-    porCrear = 5,
-    porDestruir= 3,
-    porExandir= 5,
-    porReducir= 2 
-];
-var parques= [
-    totalParques = 10,
-    porCrear = 5,
-    porDestruir= 3,
-    porExandir= 5,
-    porReducir= 2 
-];
-var zComer =[
-    totalZcomer = 10,
-    porCrear = 5,
-    porDestruir= 3,
-    porExandir= 5,
-    porReducir= 2
-]
+const data = {
+	house: [
+		{
+			ID_h: 1,
+			hab: 3,
+			creada: true,
+			porDestruir: false,
+			porExandir: true,
+		},
+	],
+	buildig: [
+		{
+			ID_b: 1,
+			pis: 3,
+			name: 'Valera',
+			creado: true,
+			porDestruir: false,
+			porExandir: true,
+		},
+	],
+	apart: [
+		{
+			ID_a: 1,
+			pis: 3,
+			name: 'Doña Barbara',
+			creado: true,
+			porDestruir: false,
+			porExandir: true,
+		},
+	],
+	ways: [
+		{
+			ID_w: 1,
+			canales: 3,
+			name: 'Av Bolivar',
+			creado: true,
+			porDestruir: false,
+			porExandir: true,
+		},
+	],
+	puentes: [
+		{
+			ID_pu: 1,
+			name: 'Bolivar',
+			creado: true,
+			porDestruir: false,
+			porExandir: true,
+		},
+	],
+	parques: [
+		{
+			ID_pa: 1,
+			name: 'Simon Bolivar',
+			creado: true,
+			porDestruir: false,
+			porExandir: true,
+		},
+	],
+	zComer: [
+		{
+			ID_pa: 1,
+			nLocals: 20,
+			pis: 5,
+			name: 'CC PLAZA',
+			creado: true,
+			porDestruir: false,
+			porExandir: true,
+		},
+	],
+};
+
 //Routting START
-app.all('/city',(req,res,next)=>{
-    console.log('Acceso al servidor de la ciudad.');
-    next();
-})
+
 //Apartado get
-app.get ('/city/house',(req, res) =>{
-    res.send(house);
+app.get('/city/house',(req, res) =>{
+    res.json(data.house);
+    
 });
 
-app.get ('/city/buildig',(req, res) =>{
-    res.send(buildig);
+app.get('/city/buildig', (req, res) => {
+	res.json(data.buildig);
 });
 
-app.get ('/city/apart',(req, res) =>{
-    res.send(apart);
+app.get('/city/apart', (req, res) => {
+	res.json(data.apart);
 });
 
-app.get ('/city/ways',(req, res) =>{
-    res.send(ways);
+app.get('/city/ways', (req, res) => {
+	res.json(data.ways);
 });
 
-app.get ('/city/puentes',(req, res) =>{
-    res.send(puentes);
+app.get('/city/puentes', (req, res) => {
+	res.json(data.puentes);
 });
 
-app.get ('/city/parques',(req, res) =>{
-    res.send(parques);
+app.get('/city/parques', (req, res) => {
+	res.json(data.parques);
 });
 
-app.get ('/city/zComer',(req, res) =>{
-    res.send(zComer);
+app.get('/city/zComer', (req, res) => {
+	res.json(data.zComer);
 });
+
 //Apartado post
-app.post ('/city/house',(req, res) =>{
+app.post('/city/house', (req, res) => {
+	data.house.push(req.body);
+    console.log('Dato Agregado');
     console.log(req.body);
-    let agg = (a,b,c)=>{
-       a[c] = parseInt(a[c])+ parseInt(b);  
-       console.log (a[c]); 
-       res.write(`${a[c]}`);
-    }; 
-    agg(house,req.body.totalCasas,0);
-    agg(house,req.body.porCrear,1);
-    agg(house,req.body.porDestruir,2);
-    agg(house,req.body.porExandir,3);
-    agg(house,req.body.porReducir,4);
-    res.end();
+    res.status(200).send('Dato agregado en la base de casa exitosamente');
 });
 //pendiente por agregar en postman)
-app.post ('/city/buildig',(req, res) =>{
+app.post('/city/buildig', (req, res) => {
+	data.buildig.push(req.body);
+    console.log('Dato Agregado');
     console.log(req.body);
-    let agg = (a,b,c)=>{
-       a[c] = parseInt(a[c])+ parseInt(b);  
-       console.log (a[c]); 
-       res.write(`${a[c]}`);
-    }; 
-    agg(buildig,req.body.totalEdif,0);
-    agg(buildig,req.body.porCrear,1);
-    agg(buildig,req.body.porDestruir,2);
-    agg(buildig,req.body.porExandir,3);
-    agg(buildig,req.body.porReducir,4);
-    res.end();
+    res.status(200).send('Dato agregado en la base de edificios exitosamente');
 });
 
-app.post ('/city/apart',(req, res) =>{
+app.post('/city/apart', (req, res) => {
+	data.apart.push(req.body);
+    console.log('Dato Agregado');
     console.log(req.body);
-    let agg = (a,b,c)=>{
-       a[c] = parseInt(a[c])+ parseInt(b);  
-       console.log (a[c]); 
-       res.write(`${a[c]}`);
-    }; 
-    agg(apart,req.body.totalAparts,0);
-    agg(apart,req.body.porCrear,1);
-    agg(apart,req.body.porDestruir,2);
-    agg(apart,req.body.porExandir,3);
-    agg(apart,req.body.porReducir,4);
-    res.end();
+    res.status(200).send('Dato agregado en la base de apartamentos exitosamente');
 });
 
-app.post ('/city/ways',(req, res) =>{
+app.post('/city/ways', (req, res) => {
+	data.ways.push(req.body);
+    console.log('Dato Agregado');
     console.log(req.body);
-    let agg = (a,b,c)=>{
-       a[c] = parseInt(a[c])+ parseInt(b);  
-       console.log (a[c]); 
-       res.write(`${a[c]}`);
-    }; 
-    agg(ways,req.body.totalCarret,0);
-    agg(ways,req.body.porCrear,1);
-    agg(ways,req.body.porDestruir,2);
-    agg(ways,req.body.porExandir,3);
-    agg(ways,req.body.porReducir,4);
-    res.end();
+    res.status(200).send('Dato agregado en la base de carreteras exitosamente');
 });
 
-app.post('/city/puentes',(req, res) =>{
+app.post('/city/puentes', (req, res) => {
+	data.puentes.push(req.body);
+    console.log('Dato Agregado');
     console.log(req.body);
-    let agg = (a,b,c)=>{
-       a[c] = parseInt(a[c])+ parseInt(b);  
-       console.log (a[c]); 
-       res.write(`${a[c]}`);
-    }; 
-    agg(puentes,req.body.totalPuents,0);
-    agg(puentes,req.body.porCrear,1);
-    agg(puentes,req.body.porDestruir,2);
-    agg(puentes,req.body.porExandir,3);
-    agg(puentes,req.body.porReducir,4);
-    res.end();
+    res.status(200).send('Dato agregado en la base de puentes exitosamente');
 });
 
-app.post ('/city/parques',(req, res) =>{
+app.post('/city/parques', (req, res) => {
+	data.parques.push(req.body);
+    console.log('Dato Agregado');
     console.log(req.body);
-    let agg = (a,b,c)=>{
-       a[c] = parseInt(a[c])+ parseInt(b);  
-       console.log (a[c]); 
-       res.write(`${a[c]}`);
-    }; 
-    agg(parques,req.body.totalParques,0);
-    agg(parques,req.body.porCrear,1);
-    agg(parques,req.body.porDestruir,2);
-    agg(parques,req.body.porExandir,3);
-    agg(parques,req.body.porReducir,4);
-    res.end();
+    res.status(200).send('Dato agregado en la base de parques exitosamente');
 });
 
-app.post ('/city/zComer',(req, res) =>{
+app.post('/city/zComer', (req, res) => {
+	data.zComer.push(req.body);
+    console.log('Dato Agregado');
     console.log(req.body);
-    let agg = (a,b,c)=>{
-       a[c] = parseInt(a[c])+ parseInt(b);  
-       console.log (a[c]); 
-       res.write(`${a[c]}`);
-    }; 
-    agg(zComer,req.body.totalZcomer,0);
-    agg(zComer,req.body.porCrear,1);
-    agg(zComer,req.body.porDestruir,2);
-    agg(zComer,req.body.porExandir,3);
-    agg(zComer,req.body.porReducir,4);
-    res.end();
+    res.status(200).send('Dato agregado en la base de centros comerciales exitosamente');
 });
+
 //Apartado put
-/*
-app.get ('/city/house',(req, res) =>{
-    res.send(house);
+
+app.put('/city/house/params/:dataID', (req, res) => {
+    var error_log = 0;
+	for (let i = 0; i < data.house.length; i++) {
+        if (data.house[i].ID_h == req.params.dataID) {
+            data.house[i] = req.body;
+			//data.house[data.house.indexOf(i)] = req.body;
+            res.status(200).send(`ID numero ${req.params.dataID} encontrado y editado correctamente :D`)
+        }
+        if (data.house[i].ID_h != req.params.dataID) {
+            error_log += 1;
+        }
+    }
+    if (error_log == data.house.length) {
+        res.status(404).send('el dato a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
+    }
 });
 
-app.get ('/city/buildig',(req, res) =>{
-    res.send(buildig);
+app.put ('/city/buildig/params/:dataID', (req, res) => {
+    var error_log = 0;
+	for (let i = 0; i < data.house.length; i++) {
+        if (data.house[i].ID_h == req.params.dataID) {
+            data.house[i] = req.body;
+			//data.house[data.house.indexOf(i)] = req.body;
+            res.status(200).send(`Dato numero ${req.params.dataID} encontrado y editado correctamente :D`)
+        }
+        if (data.house[i].ID_h != req.params.dataID) {
+            error_log += 1;
+        }
+    }
+    if (error_log == data.house.length) {
+        res.status(404).send('el dato a editar no ha sido encontrado, asegurese que el id ' + req.params.dataID + ' exista');
+    }
 });
 
-app.get ('/city/apart',(req, res) =>{
+/*app.put ('/city/apart',(req, res) =>{
     res.send(apart);
 });
 
-app.get ('/city/ways',(req, res) =>{
+app.put ('/city/ways',(req, res) =>{
     res.send(ways);
 });
 
-app.get ('/city/puentes',(req, res) =>{
+app.puts ('/city/puentes',(req, res) =>{
     res.send(puentes);
 });
 
@@ -236,6 +228,6 @@ app.get ('/city/zComer',(req, res) =>{
 app.use(express.static('Principal'));
 
 //Servidor
-app.listen(app.get('port'),()=>{
-    console.log(`Server active on : ${app.get('port')}`);
+app.listen(app.get('port'), () => {
+	console.log(`Server active on : ${app.get('port')}`);
 });
